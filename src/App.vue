@@ -21,8 +21,6 @@
 <script>
 import { posts } from "./assets/post";
 
-console.log(posts);
-
 export default {
   name: "App",
   data() {
