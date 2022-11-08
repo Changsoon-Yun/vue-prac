@@ -2,17 +2,26 @@
   <div class="menu">
     <a v-for="(작명, i) in 메뉴들" :key="i">{{ 작명 }}</a>
   </div>
-  <div v-for="(a, i) in products" :key="i">
+  <div
+    class="content"
+    @click="
+      setModal();
+      index = i;
+    "
+    v-for="(a, i) in products"
+    :key="i"
+  >
     <img :src="a.image" alt="" />
     <h4>{{ a.title }}</h4>
     <p>{{ a.content }}</p>
     <p>{{ a.price }}원</p>
   </div>
-  <button @click="setModal()">모달</button>
   <div class="black-bg" v-if="modal === true">
     <div class="white-bg">
-      <h4>상세페이지</h4>
-      <p>상세페이지내용임</p>
+      <img :src="products[index].image" alt="" />
+      <h4>{{ products[index].title }}</h4>
+      <p>{{ products[index].content }}</p>
+      <p>{{ products[index].price }}원</p>
       <button @click="setModal()">모달</button>
     </div>
   </div>
@@ -28,6 +37,7 @@ export default {
       메뉴들: ["Home", "Shop", "About"],
       products: posts,
       신고수: [0, 0, 0],
+      index: 0,
       modal: false,
     };
   },
@@ -63,7 +73,12 @@ div {
   background: white;
   border-radius: 8px;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+
 .menu {
   background: darkslateblue;
   padding: 15px;
@@ -74,5 +89,14 @@ div {
   padding: 10px;
   cursor: pointer;
   margin: 0 10px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  cursor: pointer;
 }
 </style>
