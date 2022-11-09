@@ -1,7 +1,8 @@
 <template>
   <div class="menu">
-    <a v-for="(작명, i) in 메뉴들" :key="i">{{ 작명 }}</a>
+    <a v-for="(name, i) in menus" :key="i">{{ name }}</a>
   </div>
+  <Discount></Discount>
   <div
     class="content"
     @click="
@@ -16,27 +17,21 @@
     <p>{{ a.content }}</p>
     <p>{{ a.price }}원</p>
   </div>
-  <div class="black-bg" v-if="modal === true">
-    <div class="white-bg">
-      <img :src="products[index].image" alt="" />
-      <h4>{{ products[index].title }}</h4>
-      <p>{{ products[index].content }}</p>
-      <p>{{ products[index].price }}원</p>
-      <button @click="setModal()">모달</button>
-    </div>
-  </div>
+  <Modal :products="products" :index="index" :setModal="setModal" :modal="modal"/>
 </template>
 
 <script>
 import { posts } from "./assets/post";
+import Discount from "@/components/Discount";
+import Modal from "@/components/Modal";
 
 export default {
   name: "App",
+  components: {Discount, Modal},
   data() {
     return {
-      메뉴들: ["Home", "Shop", "About"],
+      menus: ["Home", "Shop", "About"],
       products: posts,
-      신고수: [0, 0, 0],
       index: 0,
       modal: false,
     };
@@ -49,35 +44,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 body {
   margin: 0;
 }
 div {
   box-sizing: border-box;
 }
-.black-bg {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  padding: 20px;
-  top: 0;
-}
-.white-bg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+
 
 .menu {
   background: darkslateblue;
