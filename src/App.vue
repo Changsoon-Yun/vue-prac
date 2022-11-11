@@ -1,4 +1,5 @@
 <template>
+  디벨롭브렌치에서 수정함
   <div class="menu">
     <a v-for="(name, i) in menus" :key="i">{{ name }}</a>
   </div>

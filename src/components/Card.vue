@@ -31,5 +31,9 @@ export default {
   justify-content: center;
   padding: 20px;
   cursor: pointer;
+
+  & img {
+    max-width: 100%;
+  }
 }
 </style>
