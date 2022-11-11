@@ -1,10 +1,7 @@
 <template>
   <div
       class="content"
-      @click="
-      setModal();
-      index = i;
-    "
+      @click="$emit('setIndex', a.id); setModal() "
       v-for="(a, i) in products"
       :key="i"
   >
@@ -17,10 +14,22 @@
 
 <script>
 export default {
-  name: "Card"
+  name: "Card",
+  props: {
+    products: Array,
+    setModal:Function,
+    index:Number,
+  }
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  cursor: pointer;
+}
 </style>
