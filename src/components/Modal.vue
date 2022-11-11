@@ -1,10 +1,12 @@
 <template>
-  <div class="black-bg" @click="setModal()" v-if="modal === true">
+  <div :class="{close :modal}" class=" open black-bg">
     <div class="white-bg">
       <img :src="products[index].image" alt="" />
       <h4>{{ products[index].title }}</h4>
       <p>{{ products[index].content }}</p>
-      <p>{{ products[index].price }}원</p>
+      <input type="text" v-model="month">
+      <p>{{month}}개월 선택함 : {{ products[index].price * month }}원</p>
+      <button @click="$emit('close', false); "> 닫기 </button>
     </div>
   </div>
 </template>
@@ -12,6 +14,19 @@
 <script>
 export default {
   name: "Modal",
+  data(){
+    return {
+      month:1
+    }
+  },
+  watch: {
+    month(a){
+      if(isNaN(a)===true) {
+        alert("문자만 입력하세요");
+        this.month = 1;
+      }
+    }
+  },
   props:{
     products:Array,
     modal:Boolean,
@@ -23,8 +38,8 @@ export default {
 
 <style scoped lang="scss">
 .black-bg {
-  width: 100%;
-  height: 100%;
+  //width: 100%;
+  //height: 100%;
   background: rgba(0, 0, 0, 0.5);
   position: fixed;
   padding: 20px;
@@ -45,6 +60,15 @@ export default {
   justify-content: center;
   & img {
   max-width: 100%;
-    }
+  }
+
+}
+.open {
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.close {
+  opacity: 1;
 }
 </style>

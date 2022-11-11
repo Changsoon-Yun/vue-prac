@@ -1,7 +1,7 @@
 <template>
   <div
       class="content"
-      @click="$emit('setIndex', a.id); setModal() "
+      @click="$emit('setIndex', a.id); setModal(e) "
       v-for="(a, i) in products"
       :key="i"
   >

@@ -3,8 +3,8 @@
     <a v-for="(name, i) in menus" :key="i">{{ name }}</a>
   </div>
   <Discount />
-  <Card @setIndex="index = $event" :products="products" :setModal="setModal"/>
-  <Modal :products="products" :index="index" :setModal="setModal" :modal="modal"/>
+  <Card @setIndex="index = $event" :products="products" :setModal="openModal"/>
+  <Modal :products="products" :index="index" @close="closeModal" :modal="modal"/>
 </template>
 
 <script>
@@ -25,9 +25,12 @@ export default {
     };
   },
   methods: {
-    setModal() {
-      this.modal = !this.modal;
+    openModal() {
+      this.modal = true;
     },
+    closeModal(close){
+      this.modal = close;
+    }
   },
 };
 </script>
