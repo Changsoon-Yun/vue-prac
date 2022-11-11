@@ -1,5 +1,6 @@
 <template>
   <div class="menu">
+    메인에서 수정했음
     <a v-for="(name, i) in menus" :key="i">{{ name }}</a>
   </div>
   <Discount />
