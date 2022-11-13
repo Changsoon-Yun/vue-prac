@@ -1,23 +1,28 @@
 <template>
-  <v-app>
+  <v-app ref="app">
+    <v-app-bar color="grey-lighten-2" name="app-bar" class="justify-center">
+      <div class="d-flex justify-center align-center w-100">
+        <v-btn>Get data</v-btn>
+      </div>
+    </v-app-bar>
+    <v-navigation-drawer color="grey-darken-2" permanent name="drawer">
+      <div class="d-flex justify-center align-center h-100"></div>
+    </v-navigation-drawer>
     <v-main>
-      <HelloWorld/>
+      <List />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import List from "./components/List.vue";
 export default {
-  name: 'App',
+  name: "App",
 
-  components: {
-    HelloWorld,
-  },
+  components: { List },
 
   data: () => ({
     //
   }),
-}
+};
 </script>
