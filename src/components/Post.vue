@@ -1,30 +1,39 @@
 <template>
   <div v-for="(item, i) in post" :key="i" class="post">
     <div class="post-header">
-      <div class="profile" :style="{ backgroundImage :`url(${item.userImage})`}"></div>
-      <span class="profile-name">{{item.name}}</span>
+      <div
+        class="profile"
+        :style="{ backgroundImage: `url(${item.userImage})` }"
+      ></div>
+      <span class="profile-name">{{ item.name }}</span>
     </div>
-    <div class="post-body" :style="{backgroundImage:`url(${item.postImage})`}"></div>
+    <div
+      class="post-body"
+      :style="{ backgroundImage: `url(${item.postImage})` }"
+    ></div>
     <div class="post-content">
-      <p>{{item.likes}} Likes</p>
-      <p><strong>{{item.name}}</strong>{{item.content}}</p>
-      <p class="date">{{item.date}}</p>
+      <p>{{ item.likes }} Likes</p>
+      <p>
+        <strong>{{ item.name }}</strong
+        >{{ item.content }}
+      </p>
+      <p class="date">{{ item.date }}</p>
     </div>
   </div>
+  <button class="more_btn" @click="more">더 가져오기</button>
 </template>
 
 <script>
 export default {
   name: "Post",
-  data(){
-    return {
-    }
+  data() {
+    return {};
   },
-  props:{
-    post:Array,
-  }
-
-}
+  props: {
+    post: Array,
+    more: Function,
+  },
+};
 </script>
 
 <style scoped>

@@ -1,53 +1,61 @@
 <template>
-  <div class="header">
-    <ul class="header-button-left">
-      <li>Cancel</li>
-    </ul>
-    <ul class="header-button-right">
-      <li>Next</li>
-    </ul>
-    <img src="./assets/logo.png" class="logo"  alt=""/>
-  </div>
-
-  <Container :post="post"/>
-  <button class="more_btn" @click="more">더 가져오기</button>
-
-  <div class="footer">
-    <ul class="footer-button-plus">
+  <Header />
+  <div>
+    <ul class="tap-list">
       <li>
-        <input type="file" id="file" class="inputfile" />
-        <label for="file" class="input-plus">+</label>
+        <button @click="step = 0">Post</button>
+      </li>
+      <li>
+        <button @click="step = 1">ImageFilter</button>
+      </li>
+      <li>
+        <button @click="step = 2">Posting</button>
       </li>
     </ul>
   </div>
+
+  <Container :step="step" :post="post" :more="more" />
+  <Footer />
 </template>
 
 <script>
 import Container from "@/components/Container";
-import {post} from "@/assets/post";
-import axios from 'axios'
-
+import { post } from "@/assets/post";
+import axios from "axios";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Container
+    Footer,
+    Header,
+    Container,
   },
-  data(){
+  data() {
     return {
-        post,
-      page:0,
-    }
+      post,
+      page: 0,
+      step: 0,
+    };
   },
-  methods:{
-  more(){
-    axios.get(`https://codingapple1.github.io/vue/more${this.page}.json`).then(res=> {
-      this.post.push(res.data);
-      this.page++
-    })
-  }
-  }
-}
+  methods: {
+    more() {
+      axios
+        .get(`https://codingapple1.github.io/vue/more${this.page}.json`)
+        .then((res) => {
+          this.post.push(res.data);
+          this.page++;
+        });
+    },
+    upload(e) {
+      let fileName = e.target.files;
+      let url = URL.createObjectURL(fileName[0]);
+      console.log(url);
+      this.step++;
+    },
+  },
+};
 </script>
 
 <style>
@@ -135,5 +143,29 @@ ul {
   position: relative;
   border-right: 1px solid #eee;
   border-left: 1px solid #eee;
+}
+
+.tap-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tap-list li {
+  width: 100%;
+}
+
+.tap-list li button {
+  width: 100%;
+  height: 50px;
+  border: none;
+  background-color: #555555;
+  color: white;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.tap-list li button:hover {
+  background-color: white;
+  color: black;
 }
 </style>
