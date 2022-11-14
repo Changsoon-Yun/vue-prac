@@ -1,18 +1,19 @@
 <template>
-  <div class="pa-2" v-for="(item, i) in products" :key="i">
-    <h2>{{ item.title }}</h2>
-    <p>{{ item.content }}</p>
+  <div v-for="(item, i) in products" :key="i" class="pa-2">
+    <router-link to='/detail/item.id'>
+      <h2>{{ item.title }}</h2>
+      <p>{{ item.content }}</p>
+    </router-link>
   </div>
 </template>
 <script>
-import { products } from "../products";
-console.log(products);
 export default {
   name: "List",
+  props: {
+    products: Array,
+  },
   data() {
-    return {
-      products: products,
-    };
+    return {};
   },
 };
 </script>
