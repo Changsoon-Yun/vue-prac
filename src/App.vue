@@ -14,7 +14,13 @@
     </ul>
   </div>
 
-  <Container :step="step" :post="post" :more="more" />
+  <Container
+    :step="step"
+    :post="post"
+    :more="more"
+    :upload="upload"
+    :uploadedImage="uploadedImage"
+  />
   <Footer />
 </template>
 
@@ -37,6 +43,7 @@ export default {
       post,
       page: 0,
       step: 0,
+      uploadedImage: "",
     };
   },
   methods: {
@@ -50,8 +57,9 @@ export default {
     },
     upload(e) {
       let fileName = e.target.files;
-      let url = URL.createObjectURL(fileName[0]);
-      console.log(url);
+      let url = URL.createObjectURL(fileName[0]).split("blob:")[1];
+      this.uploadedImage = url;
+      console.log(this.uploadedImage);
       this.step++;
     },
   },

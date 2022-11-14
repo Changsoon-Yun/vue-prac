@@ -3,7 +3,10 @@
     <Post v-if="step === 0" :post="post" :more="more" />
     <!-- 필터선택페이지 -->
     <div v-if="step === 1">
-      <div class="upload-image"></div>
+      <div
+        class="upload-image"
+        :style="{ backgroundImage: `url(${uploadedImage})` }"
+      ></div>
       <div class="filters">
         <div class="filter-1"></div>
         <div class="filter-1"></div>
@@ -11,6 +14,7 @@
         <div class="filter-1"></div>
         <div class="filter-1"></div>
       </div>
+      <input @change="upload($event)" type="file" id="file" />
     </div>
 
     <!-- 글작성페이지 -->
@@ -35,6 +39,8 @@ export default {
     post: Array,
     step: Number,
     more: Function,
+    upload: Function,
+    uploadedImage: String,
   },
 };
 </script>
