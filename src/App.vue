@@ -1,28 +1,20 @@
 <template>
   <v-app ref="app">
-    <v-app-bar color="grey-lighten-2" name="app-bar" class="justify-center">
-      <div class="d-flex justify-center align-center w-100">
-        <v-btn>Get data</v-btn>
-      </div>
-    </v-app-bar>
-    <v-navigation-drawer color="grey-darken-2" permanent name="drawer">
-      <div class="d-flex justify-center align-center h-100"></div>
-    </v-navigation-drawer>
+    <Header />
     <v-main>
-      <List />
+      <router-view :products="products" />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import List from "./components/List.vue";
+import { products } from "@/products";
+import Header from "@/components/Header";
 export default {
   name: "App",
-
-  components: { List },
-
+  components: { Header },
   data: () => ({
-    //
+    products,
   }),
 };
 </script>
