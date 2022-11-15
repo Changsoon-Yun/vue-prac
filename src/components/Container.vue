@@ -6,14 +6,21 @@
     <div v-if="step === 1">
       <div
         class="upload-image"
+        :class="adoptedName"
         :style="{
           backgroundImage: `url(${uploadedImage})`,
-          backgroundColor: 'red',
         }"
       ></div>
 
       <div class="filters">
-        <FilterBox />
+        <FilterBox
+          :uploadedImage="uploadedImage"
+          :adoptedName="adoptedName"
+          :filterName="filterName"
+          v-for="(item, i) in filterName"
+          :key="i"
+          :item="item"
+        ></FilterBox>
       </div>
     </div>
 
@@ -21,6 +28,7 @@
     <div v-if="step === 2">
       <div
         class="upload-image"
+        :class="adoptedName"
         :style="{
           backgroundImage: `url(${uploadedImage})`,
         }"
@@ -46,11 +54,44 @@ export default {
     FilterBox,
     Post,
   },
+  data() {
+    return {
+      filterName: [
+        "aden",
+        "_1977",
+        "brannan",
+        "brooklyn",
+        "clarendon",
+        "earlybird",
+        "gingham",
+        "hudson",
+        "inkwell",
+        "kelvin",
+        "lark",
+        "lofi",
+        "maven",
+        "mayfair",
+        "moon",
+        "nashville",
+        "perpetua",
+        "reyes",
+        "rise",
+        "slumber",
+        "stinson",
+        "toaster",
+        "valencia",
+        "walden",
+        "willow",
+        "xpro2",
+      ],
+    };
+  },
   props: {
     post: Array,
     step: Number,
     more: Function,
     uploadedImage: String,
+    adoptedName: String,
   },
 };
 </script>

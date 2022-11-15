@@ -18,6 +18,7 @@
     :step="step"
     :post="post"
     :more="more"
+    :adoptedName="adoptedName"
     :uploadedImage="uploadedImage"
     @write="content = $event"
   />
@@ -45,7 +46,14 @@ export default {
       step: 0,
       uploadedImage: "",
       content: "",
+      adoptedName: "",
     };
+  },
+  mounted() {
+    this.emitter.on("filterName2", (a) => {
+      console.log(a);
+      this.adoptedName = a;
+    });
   },
   methods: {
     more() {
