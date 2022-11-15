@@ -1,18 +1,24 @@
 <template>
-  <v-app-bar class="justify-center" color="grey-lighten-2" name="app-bar">
-    <div class="d-flex justify-center align-center w-100">
-      <router-link to="/">홈으로</router-link>
-      <router-link to="/list">리스트페이지</router-link>
-    </div>
-  </v-app-bar>
-  <v-navigation-drawer color="grey-darken-2" name="drawer" permanent>
-    <div class="d-flex justify-center align-center h-100"></div>
-  </v-navigation-drawer>
+  <div class="header">
+    <ul class="header-button-left">
+      <li v-if="step > 0" @click="arrowAction(-1)">back</li>
+    </ul>
+    <ul class="header-button-right">
+      <li v-if="step < 2" @click="arrowAction(1)">Next</li>
+      <li v-if="step === 2" @click="publish">publish</li>
+    </ul>
+    <img src="../assets/logo.png" class="logo" alt="" />
+  </div>
 </template>
 
 <script>
 export default {
   name: "Header",
+  props: {
+    step: Number,
+    arrowAction: Function,
+    publish: Function,
+  },
 };
 </script>
 
