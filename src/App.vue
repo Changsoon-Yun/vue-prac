@@ -21,7 +21,7 @@
     :upload="upload"
     :uploadedImage="uploadedImage"
   />
-  <Footer />
+  <Footer :upload="upload" />
 </template>
 
 <script>

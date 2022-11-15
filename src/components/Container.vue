@@ -2,11 +2,16 @@
   <div>
     <Post v-if="step === 0" :post="post" :more="more" />
     <!-- 필터선택페이지 -->
+
     <div v-if="step === 1">
       <div
         class="upload-image"
-        :style="{ backgroundImage: `url(${uploadedImage})` }"
+        :style="{
+          backgroundImage: `url(${uploadedImage})`,
+          backgroundColor: 'red',
+        }"
       ></div>
+
       <div class="filters">
         <div class="filter-1"></div>
         <div class="filter-1"></div>
@@ -19,7 +24,12 @@
 
     <!-- 글작성페이지 -->
     <div v-if="step === 2">
-      <div class="upload-image"></div>
+      <div
+        class="upload-image"
+        :style="{
+          backgroundImage: `url(${uploadedImage})`,
+        }"
+      ></div>
       <div class="write">
         <textarea class="write-box">write!</textarea>
       </div>
@@ -49,7 +59,7 @@ export default {
 .upload-image {
   width: 100%;
   height: 450px;
-  background: cornflowerblue;
+  /*background: cornflowerblue;*/
   background-size: cover;
 }
 .filters {
