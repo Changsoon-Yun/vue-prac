@@ -13,13 +13,8 @@
       ></div>
 
       <div class="filters">
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
+        <FilterBox />
       </div>
-      <input @change="upload($event)" type="file" id="file" />
     </div>
 
     <!-- 글작성페이지 -->
@@ -31,7 +26,11 @@
         }"
       ></div>
       <div class="write">
-        <textarea class="write-box">write!</textarea>
+        <textarea
+          @input="$emit('write', $event.target.value)"
+          class="write-box"
+          placeholder="Write!"
+        ></textarea>
       </div>
     </div>
   </div>
@@ -39,17 +38,18 @@
 
 <script>
 import Post from "@/components/Post";
+import FilterBox from "@/components/FilterBox";
 
 export default {
   name: "Container",
   components: {
+    FilterBox,
     Post,
   },
   props: {
     post: Array,
     step: Number,
     more: Function,
-    upload: Function,
     uploadedImage: String,
   },
 };

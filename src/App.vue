@@ -1,5 +1,5 @@
 <template>
-  <Header />
+  <Header :arrowAction="arrowAction" :publish="publish" :step="step" />
   <div>
     <ul class="tap-list">
       <li>
@@ -18,8 +18,8 @@
     :step="step"
     :post="post"
     :more="more"
-    :upload="upload"
     :uploadedImage="uploadedImage"
+    @write="content = $event"
   />
   <Footer :upload="upload" />
 </template>
@@ -44,6 +44,7 @@ export default {
       page: 0,
       step: 0,
       uploadedImage: "",
+      content: "",
     };
   },
   methods: {
@@ -51,16 +52,33 @@ export default {
       axios
         .get(`https://codingapple1.github.io/vue/more${this.page}.json`)
         .then((res) => {
+          console.log(res.data);
           this.post.push(res.data);
           this.page++;
         });
     },
     upload(e) {
       let fileName = e.target.files;
-      let url = URL.createObjectURL(fileName[0]).split("blob:")[1];
+      let url = URL.createObjectURL(fileName[0]);
       this.uploadedImage = url;
-      console.log(this.uploadedImage);
       this.step++;
+    },
+    arrowAction(n) {
+      this.step += n;
+    },
+    publish() {
+      let data = {
+        name: "Cs Yoon",
+        content: this.content,
+        date: "July 25",
+        likes: 12,
+        postImage: this.uploadedImage,
+        userImage: this.uploadedImage,
+        filter: "perpetua",
+        liked: false,
+      };
+      this.post.unshift(data);
+      this.step = 0;
     },
   },
 };
